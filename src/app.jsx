@@ -1,8 +1,11 @@
+import React from 'react';
 import './app.css';
+import Habit from './components/habit';
 
 function App() {
+  const name = 'JY';
   return (
-    <h1> Hello!! </h1>
+    <Habit />
   );
 }
 
