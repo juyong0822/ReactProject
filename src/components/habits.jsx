@@ -5,9 +5,9 @@ class Habits extends Component {
 
     state = {
         habits: [
-            {name: 'Reading', count: 0},
-            {name: 'Running', count: 0},
-            {name: 'Coding', count: 0},
+            {id: 1, name: 'Reading', count: 0},
+            {id: 2, name: 'Running', count: 0},
+            {id: 3, name: 'Coding', count: 0},
         ]
     };
 
@@ -17,7 +17,7 @@ class Habits extends Component {
                 {
                     this.state.habits.map(habit => {
                         return (
-                            <Habit habit={habit}/>
+                            <Habit key={habit.id} habit={habit}/>
                         );
                     })
                 }
