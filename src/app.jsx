@@ -1,7 +1,6 @@
 import "./app.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
-import Input from "./components/input";
 import Habits from "./components/habits";
 import Reset from "./components/reset";
 
@@ -67,7 +66,6 @@ class App extends Component {
         return (
             <>
                 <Navbar count={this.state.count} />
-                <Input onAdd={this.handleAdd} />
                 <Habits
                     habits={this.state.habits}
                     onIncrement={this.handleIncrement}
