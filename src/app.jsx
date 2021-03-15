@@ -2,12 +2,10 @@ import "./app.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
 import Habits from "./components/habits";
-import Reset from "./components/reset";
 
 class App extends Component {
     state = {
         id: 3,
-        count: 0,
         habits: [
             { id: 1, name: "Reading", count: 0 },
             { id: 2, name: "Running", count: 0 },
@@ -21,6 +19,7 @@ class App extends Component {
         const habits = [...this.state.habits];
         const id = this.state.id + 1;
         habits.concat([{ id: id, name: input, count: 0 }]);
+
         this.setState({ id, habits });
     };
 
@@ -29,9 +28,8 @@ class App extends Component {
         const habits = [...this.state.habits];
         const index = habits.indexOf(habit);
         habits[index].count += 1;
-        const count = habits.filter((item) => item.count > 0);
 
-        this.setState({ count: count.length, habits });
+        this.setState({ habits });
     };
 
     handleDecrement = (habit) => {
@@ -39,20 +37,20 @@ class App extends Component {
         const index = habits.indexOf(habit);
         habits[index].count =
             habits[index].count === 0 ? 0 : habits[index].count - 1;
-        const count = habits.filter((item) => item.count > 0);
-        this.setState({ count: count.length, habits });
+
+        this.setState({ habits });
     };
 
     handleDelete = (habit) => {
         const habits = this.state.habits.filter((item) => item.id !== habit.id);
-        const count = habits.filter((item) => item.count > 0);
-        this.setState({ count: count.length, habits });
+
+        this.setState({ habits });
     };
 
     handleReset = () => {
         const state = {
             id: 3,
-            count: 0,
+            totalCount: 0,
             habits: [
                 { id: 1, name: "Reading", count: 0 },
                 { id: 2, name: "Running", count: 0 },
@@ -65,14 +63,20 @@ class App extends Component {
     render() {
         return (
             <>
-                <Navbar count={this.state.count} />
+                <Navbar
+                    totalCount={
+                        this.state.habits.filter((item) => item.count > 0)
+                            .length
+                    }
+                />
                 <Habits
                     habits={this.state.habits}
+                    onAdd={this.handleAdd}
                     onIncrement={this.handleIncrement}
                     onDecrement={this.handleDecrement}
                     onDelete={this.handleDelete}
+                    onReset={this.handleReset}
                 />
-                <Reset onReset={this.handleReset} />
             </>
         );
     }
