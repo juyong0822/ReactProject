@@ -13,17 +13,25 @@ class Habits extends Component {
     // make callback functions
     // if button clicked, just call the functions
     handleIncrement = (habit) => {
-        console.log(JSON.stringify(habit.name));
-        habit.count += 1;
+        // make new array to change state
+        const habits = [...this.state.habits];
+        const index = habits.indexOf(habit);
+        habits[index].count += 1;
+
+        this.setState({ habits });
     };
 
     handleDecrement = (habit) => {
-        console.log("handleDecrement ${habit.name}");
-        habit.count -= 1;
+        const habits = [...this.state.habits];
+        const index = habits.indexOf(habit);
+        const count = habits[index].count - 1;
+        habits[index].count = count < 0 ? 0 : count;
+        this.setState({ habits });
     };
 
     handleDelete = (habit) => {
-        console.log("handleDelete ${habit.name}");
+        const habits = this.state.habits.filter((item) => item.id !== habit.id);
+        this.setState({ habits });
     };
 
     render() {
