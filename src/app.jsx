@@ -15,10 +15,11 @@ class App extends Component {
 
     // make callback functions
     // if button clicked, just call the functions
-    handleAdd = (input) => {
-        const habits = [...this.state.habits];
+    handleAdd = (name) => {
         const id = this.state.id + 1;
-        habits.concat([{ id: id, name: input, count: 0 }]);
+        const habits = [...this.state.habits].concat([
+            { id: id, name: name, count: 0 },
+        ]);
 
         this.setState({ id, habits });
     };
@@ -48,16 +49,12 @@ class App extends Component {
     };
 
     handleReset = () => {
-        const state = {
-            id: 3,
-            totalCount: 0,
-            habits: [
-                { id: 1, name: "Reading", count: 0 },
-                { id: 2, name: "Running", count: 0 },
-                { id: 3, name: "Coding", count: 0 },
-            ],
-        };
-        this.setState(state);
+        const habits = this.state.habits.map((habit) => {
+            habit.count = 0;
+            return habit;
+        });
+
+        this.setState({ habits });
     };
 
     render() {

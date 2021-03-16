@@ -1,16 +1,32 @@
 import React, { Component } from "react";
 
 class HabitAddForm extends Component {
-    handleAdd = () => {
-        const name = null;
-        this.props.onAdd(name);
+    formRef = React.createRef();
+    inputRef = React.createRef();
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const name = this.inputRef.current.value;
+        name && this.props.onAdd(name);
+        this.formRef.current.reset();
+        // this.inputRef.current.value = "";
     };
+
     render() {
         return (
-            <div className="habit-addform">
-                <input type="text" id="new-habit"></input>
-                <button onClick={this.handleAdd}>Add</button>
-            </div>
+            <form
+                ref={this.formRef}
+                className="add-form"
+                onSubmit={this.handleSubmit}
+            >
+                <input
+                    ref={this.inputRef}
+                    className="add-input"
+                    type="text"
+                    placeholder="Habit"
+                />
+                <button className="add-button">Add</button>
+            </form>
         );
     }
 }
