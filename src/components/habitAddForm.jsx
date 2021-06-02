@@ -1,16 +1,16 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 
 const HabitAddForm = memo((props) => {
     const formRef = React.createRef();
     const inputRef = React.createRef();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = useCallback((event) => {
         event.preventDefault();
         const name = inputRef.current.value;
         name && props.onAdd(name);
         formRef.current.reset();
         // this.inputRef.current.value = "";
-    };
+    });
 
     return (
         <form ref={formRef} className="add-form" onSubmit={handleSubmit}>

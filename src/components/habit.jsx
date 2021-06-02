@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 
 const Habit = memo((props) => {
     const { name, count } = props.habit;
@@ -6,17 +6,17 @@ const Habit = memo((props) => {
 
     // make callback functions
     // if button clicked, just call the functions
-    const handleIncrement = () => {
+    const handleIncrement = useCallback(() => {
         props.onIncrement(props.habit);
-    };
+    });
 
-    const handleDecrement = () => {
+    const handleDecrement = useCallback(() => {
         props.onDecrement(props.habit);
-    };
+    });
 
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
         props.onDelete(props.habit);
-    };
+    });
 
     return (
         <li className="habit">
