@@ -2,6 +2,7 @@
   "name": "dream_coding",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://juyong0822.github.io/ReactProject_HabitTracker",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@testing-library/jest-dom": "^5.11.9",
